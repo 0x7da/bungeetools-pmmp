@@ -1,0 +1,16 @@
+enable: true
+overwrite-commands:
+  kick: true
+  transferserver: true
+  msg: true
+command-config:
+  kick:
+    permission: bungeetools.kick
+    noperm-message: "§cYou are not allowed to use this command!"
+    success-message: "§cSuccessfully kicked {player} for {reason}"
+    usage: "§cUse /kick <Player> <Reason>"
+    description: "kick a player from the network"
+  msg:
+    permission: bungeetools.msg
+    noperm-message: "§cYou are not allowed to use this command!"
+    usage: "§cUse /msg <Player> <Message>"
