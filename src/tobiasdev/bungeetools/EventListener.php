@@ -3,6 +3,8 @@ namespace tobiasdev\bungeetools;
 use pocketmine\event\Listener;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\network\mcpe\protocol\ScriptCustomEventPacket;
+use tobiasdev\bungeetools\protocol\Request;
+use tobiasdev\bungeetools\protocol\RequestPool;
 use tobiasdev\bungeetools\protocol\StringStream;
 
 class EventListener implements  Listener{
@@ -10,10 +12,10 @@ class EventListener implements  Listener{
         $packet = $event->getPacket();
         if($packet instanceof ScriptCustomEventPacket){
             if ( $packet->eventName == "bungeecord:main" ) {
-                $reader = new StringStream($packet->eventData);
-                var_dump("TEST1: " . $reader->readString());
-                var_dump("TEST2: " . $reader->readString());
-                $event->getPlayer()->sendMessage("Currently players online: " . $reader->readInt());
+                $request = RequestPool::getRequestForPlayer($event->getPlayer()->getName());
+                if($request instanceof Request){
+                    $request->notify($packet->eventData);
+                }
             }
         }
     }

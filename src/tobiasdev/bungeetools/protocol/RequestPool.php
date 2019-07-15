@@ -32,4 +32,7 @@ abstract class RequestPool
         }
         return null;
     }
+    public static function getRequestForPlayer(String $name): ?Request{
+        if(isset(self::$requests[$name])) return self::$requests[$name]; else return null;
+    }
 }

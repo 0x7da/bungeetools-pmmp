@@ -54,11 +54,6 @@ class API
             ProtocolUtils::writeString("KickPlayer", $packet->eventData);
             ProtocolUtils::writeString($player, $packet->eventData);
             ProtocolUtils::writeString($message, $packet->eventData);
-           /* if($align){
-                ProtocolUtils::writeString(static::alignMessage($lines), $packet->eventData);
-            }else{
-                ProtocolUtils::writeString(implode("\n", $lines), $packet->eventData);
-            }*/
             $sendthrough->sendDataPacket($packet);
             return true;
         }else{
