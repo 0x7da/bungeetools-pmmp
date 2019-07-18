@@ -4,6 +4,8 @@ overwrite-commands:
   list: true
   transferserver: true
   msg: true
+  # This command is currently in Beta and should not be enabled!
+  connect: false
 command-config:
   kick:
     permission: bungeetools.kick
@@ -11,6 +13,11 @@ command-config:
     success-message: "§cSuccessfully kicked {player} for {reason}"
     usage: "§cUse /kick <Player> <Reason>"
     description: "kick a player from the network"
+  connect:
+    permission: bungeetools.connect
+    noperm-message: "§cYou are not allowed to use this command!"
+    usage: "§cUse /connect <Server>"
+    description: "Switch to another server"
   list:
     permission: bungeetools.list
     noperm-message: "§cYou are not allowed to use this command!"

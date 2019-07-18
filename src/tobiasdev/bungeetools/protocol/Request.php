@@ -58,7 +58,7 @@ class Request
                 $this->setData([
                     "servername" => $stream->readString(),
                     "ip" => $stream->readString(),
-                    "port" => $stream->readInt()
+                    "port" => ($port = $stream->readUnsignedShort()) != null ? $port : null
                 ]);
                 break;
             case RequestType::TYPE_GET_SERVER_LIST:

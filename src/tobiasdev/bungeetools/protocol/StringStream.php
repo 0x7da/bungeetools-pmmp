@@ -7,6 +7,13 @@ use pocketmine\utils\Binary;
 
 use pocketmine\utils\MainLogger;
 
+/**
+ * Class StringStream
+ * @package tobiasdev\bungeetools\protocol
+ * @author TobiasDev
+ * Class for decoding data from packet reply
+ * Implements Java's readUTF() as readString()
+ */
 class StringStream
 {
     private $buffer;
@@ -44,6 +51,7 @@ class StringStream
             $offset = $this->pointer;
             return Binary::readInt($this->buffer{$offset} . $this->buffer{$offset + 1} . $this->buffer{$offset + 2} . $this->buffer{$offset + 3});
         } catch (Exception $e) {
+            var_dump("Target Buffer: " . $this->buffer);
             MainLogger::getLogger()->warning("Error while decoding int: " . $this->buffer . " ( " . $e->getMessage() . ", LINE: " . $e->getLine() . " )");
             return null;
         }
@@ -53,5 +61,14 @@ class StringStream
     {
         MainLogger::getLogger()->debug("Changed pointer from " . $this->pointer . " to " . $newpointer);
         $this->pointer = $newpointer;
+    }
+    public function readUnsignedShort(): ?int {
+        try{
+            return Binary::readUnsignedVarInt($this->buffer, $this->pointer);
+        }catch (Exception $e) {
+            var_dump("Target Buffer: " . $this->buffer);
+            MainLogger::getLogger()->warning("Error while decoding unsignedShort: " . $this->buffer . " ( " . $e->getMessage() . ", LINE: " . $e->getLine() . " )");
+            return null;
+        }
     }
 }

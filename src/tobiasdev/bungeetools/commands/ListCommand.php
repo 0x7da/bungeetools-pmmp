@@ -28,10 +28,9 @@ class ListCommand extends Command{
             RequestPool::addRequest($sender, new Request($pk->eventData, $sender->getName(), RequestType::TYPE_GET_PLAYER_LIST, function(array $result, array $extra){
                 if(($player = Server::getInstance()->getPlayerExact($extra["player"])) instanceof Player){
                     if($extra["server"] == "ALL"){
-                        var_dump($result);
                         $player->sendMessage("Global Players Online ( " . count($result["players"]) . " ): " . implode(", ", $result["players"]));
                     }else{
-                        $player->sendMessage("Players online on " . $extra["server"] . " ( " . count($result["players"]) . " ): " . implode(", ", $result["players"]));
+                        $player->sendMessage("Players online on " . $extra["server"] . " ( " . (ctype_alnum($result["players"][0]) ? count($result["players"]) . " ): " . implode(", ", $result["players"]) : "§cNo Players Online §r)"));
                     }
                 }
             }, ["player" => $sender->getName(), "server" => $s]));
