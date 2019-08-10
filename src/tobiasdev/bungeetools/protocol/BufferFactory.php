@@ -42,6 +42,12 @@ class BufferFactory
                 ProtocolUtils::writeString("IP", $str);
                 return $str;
                 break;
+            case RequestType::TYPE_GET_PING:
+                $str = "";
+                ProtocolUtils::writeString("GetPing", $str);
+                ProtocolUtils::writeString($data["player"], $str);
+                return $str;
+                break;
             default:
                 return null;
                 break;

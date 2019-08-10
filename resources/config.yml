@@ -4,6 +4,7 @@ overwrite-commands:
   list: true
   transferserver: true
   msg: true
+  ping: true
   # This command is currently in Beta and should not be enabled!
   connect: false
 command-config:
@@ -18,6 +19,11 @@ command-config:
     noperm-message: "§cYou are not allowed to use this command!"
     usage: "§cUse /connect <Server>"
     description: "Switch to another server"
+  ping:
+    permission: bungeetools.ping
+    noperm-message: "§cYou are not allowed to use this command!"
+    usage: ""
+    description: "Get your latency to the network!"
   list:
     permission: bungeetools.list
     noperm-message: "§cYou are not allowed to use this command!"

@@ -67,6 +67,12 @@ class Request
                     "servers" => explode(", ", $stream->readString())
                 ]);
                 break;
+            case RequestType::TYPE_GET_PING:
+                // Thanks to fives, this request doesn't has any other data than the result
+                $this->setData([
+                    "ping" => $stream->readInt()
+                ]);
+                break;
             default:
                 MainLogger::getLogger()->warning("Unrecognized RequestType: " . $this->type);
                 return;

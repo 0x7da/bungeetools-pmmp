@@ -8,7 +8,7 @@ use pocketmine\Server;
 
 class API
 {
-    public static function transferPlayer(Player $player, String $server) : bool
+    public static function transferPlayer(Player $player, String $server): bool
     {
         $pk = new ScriptCustomEventPacket();
         $pk->eventName = "bungeecord:main";
@@ -19,7 +19,9 @@ class API
         $player->sendDataPacket($pk);
         return true;
     }
-    public static function getPlayers(){
+
+    public static function getPlayers()
+    {
         if (($sendthrough = static::getRandomPlayer()) != null) {
             $pk = new ScriptCustomEventPacket();
             $pk->eventName = "bungeecord:main";
@@ -30,7 +32,8 @@ class API
             $sendthrough->sendDataPacket($pk);
         }
     }
-    public static function transfer(String $player, String $target) : bool
+
+    public static function transfer(String $player, String $target): bool
     {
         if (($sendthrough = static::getRandomPlayer()) != null) {
             $packet = new ScriptCustomEventPacket();
@@ -46,7 +49,9 @@ class API
             return false;
         }
     }
-    public static function kickPlayer(String $player, String $message) : bool{
+
+    public static function kickPlayer(String $player, String $message): bool
+    {
         if (($sendthrough = static::getRandomPlayer()) != null) {
             $packet = new ScriptCustomEventPacket();
             $packet->eventName = "bungeecord:main";
@@ -56,11 +61,12 @@ class API
             ProtocolUtils::writeString($message, $packet->eventData);
             $sendthrough->sendDataPacket($packet);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public static function sendMessage(String $message, String $player) : bool
+
+    public static function sendMessage(String $message, String $player): bool
     {
         if (($sendthrough = static::getRandomPlayer()) != null) {
             $packet = new ScriptCustomEventPacket();
@@ -75,19 +81,22 @@ class API
             return false;
         }
     }
-    public static function alignMessage(array $lines): ?string{
+
+    public static function alignMessage(array $lines): ?string
+    {
         $stickWith = max(array_map('strlen', $lines));
         $output = "";
-        foreach($lines as $line){
+        foreach ($lines as $line) {
             $diff = round(($stickWith - strlen($line)) / 2);
 
-            if($diff !== 0) $line = str_repeat(" ", $diff) . $line;
+            if ($diff !== 0) $line = str_repeat(" ", $diff) . $line;
 
             $output .= "{$line}\n";
         }
 
         return $output;
     }
+
     public static function getRandomPlayer(): ?Player
     {
         if (count(Server::getInstance()->getOnlinePlayers()) > 0) {
